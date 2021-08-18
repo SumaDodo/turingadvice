@@ -14,16 +14,17 @@ class BestOfNGenerator():
     
     def generate_N(self, inputs_path, outputs_path):
         # Repeat each input N times, store in temporary file
-        TMP_REPEATS_PATH = os.path.join(self.tmp_dir, "BoN-repeats.txt")
-        with tf.io.gfile.GFile(inputs_path, "r") as inputs_file, \
-             tf.io.gfile.GFile(TMP_REPEATS_PATH, "w") as repeats_file:
-            for line in inputs_file:
-                for _ in range(self.N):
-                    repeats_file.write(line + "\n")
+        # TMP_REPEATS_PATH = os.path.join(self.tmp_dir, "BoN-repeats.txt")
+        # with tf.io.gfile.GFile(inputs_path, "r") as inputs_file, \
+        #      tf.io.gfile.GFile(TMP_REPEATS_PATH, "w") as repeats_file:
+        #     for line in inputs_file:
+        #         for _ in range(self.N):
+        #             repeats_file.write(line + "\n")
         # Predict over repeated inputs file
         self.model.predict(
-            input_file=TMP_REPEATS_PATH,
+            input_file=inputs_path,
             output_file=outputs_path,
             checkpoint_steps=self.t5_model_ckpt_steps,
-            sampling_keep_top_p=self.sampling_keep_top_p
+            sampling_keep_top_p=self.sampling_keep_top_p,
+            repeats = self.N
         )
