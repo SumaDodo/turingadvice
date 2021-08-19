@@ -2,7 +2,9 @@ import os
 import sys
 from absl import flags
 
-from t5.models.mtf_model import MtfModel, _get_latest_checkpoint_from_dir
+import t5
+# from t5.models.mtf_model import MtfModel, _get_latest_checkpoint_from_dir
+from t5.models.mtf_model import _get_latest_checkpoint_from_dir
 from best_of_n.generator import BestOfNGenerator
 
 def _define_flags():
@@ -61,7 +63,7 @@ def main(_):
         ckpt_steps = FLAGS.checkpoint_steps
     print("running main")
     # tf.logging.info("running main")
-    t5_model = MtfModel(
+    t5_model = t5.models.MtfModel(
         model_dir=FLAGS.model_dir,
         tpu=os.uname()[1],
         tpu_topology='2x2', # Must be this for validation
