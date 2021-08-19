@@ -21,6 +21,7 @@ class BestOfNGenerator():
         #         for _ in range(self.N):
         #             repeats_file.write(line + "\n")
         # Predict over repeated inputs file
+        print("before predict")
         self.model.predict(
             input_file=inputs_path,
             output_file=outputs_path,
@@ -28,3 +29,4 @@ class BestOfNGenerator():
             sampling_keep_top_p=self.sampling_keep_top_p,
             repeats = self.N
         )
+        print("after predict")
