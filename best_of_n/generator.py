@@ -27,5 +27,5 @@ class BestOfNGenerator():
             output_file=outputs_path,
             checkpoint_steps=self.model_ckpt_steps,
             sampling_keep_top_p=self.sampling_keep_top_p,
-            repeats = self.N
+            N = self.N
         )
