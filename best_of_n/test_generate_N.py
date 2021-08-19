@@ -63,8 +63,7 @@ def main(_):
         ckpt_steps = _get_latest_checkpoint_from_dir(FLAGS.model_dir)
     else:
         ckpt_steps = FLAGS.checkpoint_steps
-    print("running main")
-    # tf.logging.info("running main")
+
     t5_model = t5.models.MtfModel(
         model_dir=FLAGS.model_dir,
         tpu=os.uname()[1],

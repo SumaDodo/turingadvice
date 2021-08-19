@@ -22,11 +22,9 @@ class BestOfNGenerator():
         #         for _ in range(self.N):
         #             repeats_file.write(line + "\n")
         # Predict over repeated inputs file
-        print("before predict")
         self.t5_model.predict(
             input_file=inputs_path,
             output_file=outputs_path,
             checkpoint_steps=self.model_ckpt_steps,
             sampling_keep_top_p=self.sampling_keep_top_p
         )
-        print("after predict")
