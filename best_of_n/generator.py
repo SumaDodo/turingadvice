@@ -27,7 +27,6 @@ class BestOfNGenerator():
             input_file=inputs_path,
             output_file=outputs_path,
             checkpoint_steps=self.t5_model_ckpt_steps,
-            sampling_keep_top_p=self.sampling_keep_top_p,
-            repeats = self.N
+            sampling_keep_top_p=self.sampling_keep_top_p
         )
         print("after predict")
