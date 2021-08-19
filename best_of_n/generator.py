@@ -1,6 +1,7 @@
 import os
 
 import tensorflow as tf
+from mesh_tensorflow.transformer import utils
 
 class BestOfNGenerator():
     def __init__(
