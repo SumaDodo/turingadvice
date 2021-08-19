@@ -4,13 +4,13 @@ import tensorflow as tf
 
 class BestOfNGenerator():
     def __init__(
-        self, t5_model, t5_model_ckpt_steps, N, sampling_keep_top_p, tmp_dir
+        self, t5_model, t5_model_ckpt_steps, N, sampling_keep_top_p
         ):
         self.t5_model = t5_model
         self.model_ckpt_steps = t5_model_ckpt_steps
         self.N = N
         self.sampling_keep_top_p = sampling_keep_top_p
-        self.tmp_dir = tmp_dir
+        # self.tmp_dir = tmp_dir
     
     def generate_N(self, inputs_path, outputs_path):
         # Repeat each input N times, store in temporary file

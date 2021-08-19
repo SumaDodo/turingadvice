@@ -46,11 +46,11 @@ def _define_flags():
         default=-1,
         help="Steps in checkpoint to be used for prediction"
     )
-    flags.DEFINE_string(
-        name="tmp_dir",
-        default=None,
-        help="Temporary dir for internal use of BestOfNGenerator"
-    )
+    # flags.DEFINE_string(
+    #     name="tmp_dir",
+    #     default=None,
+    #     help="Temporary dir for internal use of BestOfNGenerator"
+    # )
 
 def main(_):
     FLAGS = _define_flags()
