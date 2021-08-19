@@ -279,7 +279,7 @@ class MtfModel(T5Model):
 
   def predict(self, input_file, output_file, checkpoint_steps=-1,
               beam_size=1, temperature=1.0,
-              sentencepiece_model_path=t5.data.DEFAULT_SPM_PATH, sampling_keep_top_p=1.0, N = 100):
+              sentencepiece_model_path=t5.data.DEFAULT_SPM_PATH, sampling_keep_top_p=1.0):
     """Predicts targets from the given inputs.
 
     Args:
@@ -318,7 +318,7 @@ class MtfModel(T5Model):
     utils.infer_model(self.estimator(vocabulary), vocabulary,
                       self._sequence_length, self.batch_size,
                       self._model_type, self._model_dir, checkpoint_steps,
-                      input_file, output_file, repeats = N)
+                      input_file, output_file)
 
   def export(self, export_dir=None, checkpoint_step=-1, beam_size=1,
              temperature=1.0,
