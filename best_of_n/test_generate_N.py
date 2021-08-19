@@ -3,6 +3,7 @@ import sys
 from absl import flags
 
 import t5
+import tensorflow as tf
 # from t5.models.mtf_model import MtfModel, _get_latest_checkpoint_from_dir
 from t5.models.mtf_model import _get_latest_checkpoint_from_dir
 from best_of_n.generator import BestOfNGenerator
