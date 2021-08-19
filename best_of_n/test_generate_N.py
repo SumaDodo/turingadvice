@@ -80,3 +80,6 @@ def main(_):
         # tmp_dir=FLAGS.tmp_dir
     )
     generator.generate_N(FLAGS.input_path, FLAGS.output_path)
+
+if __name__ == "__main__":
+    tf.app.run()
