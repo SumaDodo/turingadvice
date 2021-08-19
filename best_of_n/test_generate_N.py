@@ -60,7 +60,7 @@ def main(_):
     else:
         ckpt_steps = FLAGS.checkpoint_steps
     print("running main")
-    tf.logging.info("running main")
+    # tf.logging.info("running main")
     t5_model = MtfModel(
         model_dir=FLAGS.model_dir,
         tpu=os.uname()[1],
@@ -74,7 +74,7 @@ def main(_):
         t5_model=t5_model,
         t5_model_ckpt_steps=ckpt_steps,
         N=FLAGS.N,
-        sampling_keep_top_p=0.94,
-        tmp_dir=FLAGS.tmp_dir
+        sampling_keep_top_p=0.94
+        # tmp_dir=FLAGS.tmp_dir
     )
     generator.generate_N(FLAGS.input_path, FLAGS.output_path)
