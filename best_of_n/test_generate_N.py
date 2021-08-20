@@ -49,11 +49,11 @@ def _define_flags():
         default=-1,
         help="Steps in checkpoint to be used for prediction"
     )
-    # flags.DEFINE_string(
-    #     name="tmp_dir",
-    #     default=None,
-    #     help="Temporary dir for internal use of BestOfNGenerator"
-    # )
+    flags.DEFINE_string(
+        name="tmp_dir",
+        default=None,
+        help="Temporary dir for internal use of BestOfNGenerator"
+    )
     return flags.FLAGS
 
 def main(_):
@@ -77,8 +77,8 @@ def main(_):
         t5_model=t5_model,
         t5_model_ckpt_steps=ckpt_steps,
         N=FLAGS.N,
-        sampling_keep_top_p=0.94
-        # tmp_dir=FLAGS.tmp_dir
+        sampling_keep_top_p=0.94,
+        tmp_dir=FLAGS.tmp_dir
     )
     generator.generate_N(FLAGS.input_path, FLAGS.output_path)
 
