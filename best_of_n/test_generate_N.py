@@ -82,5 +82,11 @@ def main(_):
     )
     generator.generate_N(FLAGS.input_path, FLAGS.output_path)
 
+    FINAL_OUTPUT_FILE = os.path.join(FLAGS.tmp_dir, "Output.txt")
+    TMP_REPEATS_PATH = os.path.join(FLAGS.tmp_dir, "BoN-repeats.txt")
+    with tf.io.gfile.GFile(TMP_REPEATS_PATH, "r") as quest, tf.io.gfile.GFile(FINAL_OUTPUT_FILE,"w") as output_file, tf.io.gfile.GFile(FLAGS.output_path, "r") as target:
+        for q, t in zip(quest, target):
+            FINAL_OUTPUT_FILE.write(q + "\t" + t)
+
 if __name__ == "__main__":
     tf.app.run()
