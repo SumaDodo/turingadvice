@@ -19,7 +19,7 @@ def main(_):
     OUTPUT_PRED_FILE = os.path.join(FLAGS.tmp_dir, "output_test.tsv-1037496")
     with tf.io.gfile.GFile(TMP_REPEATS_PATH, "r") as quest, tf.io.gfile.GFile(FINAL_OUTPUT_FILE,"w") as output_file, tf.io.gfile.GFile(OUTPUT_PRED_FILE, "r") as target:
         for q, t in zip(quest, target):
-            output_file.write(q + "\t" + t)
+            output_file.write(q['Selftext'] + "\t" + t)
 
 if __name__ == "__main__":
     tf.app.run()
