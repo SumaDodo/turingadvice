@@ -29,7 +29,7 @@ class BestOfNGenerator():
             sampling_keep_top_p=self.sampling_keep_top_p
         )
 
-        FINAL_OUTPUT_FILE = os.path.join(self.out_dir, "Output.txt")
+        FINAL_OUTPUT_FILE = os.path.join(self.tmp_dir, "Output.txt")
         with tf.io.gfile.GFile(TMP_REPEATS_PATH, "r") as quest, tf.io.gfile.GFile(FINAL_OUTPUT_FILE, "w") as output_file, tf.io.gfile.GFile(outputs_path, "r") as target:
             for q, t in zip(quest, target):
                 FINAL_OUTPUT_FILE.write(q+"\t"+t)
