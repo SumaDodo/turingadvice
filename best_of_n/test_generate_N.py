@@ -85,8 +85,8 @@ def main(_):
     FINAL_OUTPUT_FILE = os.path.join(FLAGS.tmp_dir, "Output.txt")
     TMP_REPEATS_PATH = os.path.join(FLAGS.tmp_dir, "BoN-repeats.txt")
     with tf.io.gfile.GFile(TMP_REPEATS_PATH, "r") as quest, tf.io.gfile.GFile(FINAL_OUTPUT_FILE,"w") as output_file, tf.io.gfile.GFile(FLAGS.output_path, "r") as target:
-        for q, t in zip(quest, target):
-            FINAL_OUTPUT_FILE.write(q['Selftext'] + "\t" + t)
+        for q, t in zip(quest['Selftext'], target):
+            FINAL_OUTPUT_FILE.write(q + "\t" + t + "\n")
 
 if __name__ == "__main__":
     tf.app.run()
