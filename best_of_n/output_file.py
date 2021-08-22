@@ -20,7 +20,7 @@ def main(_):
     OUTPUT_PRED_FILE = os.path.join(FLAGS.tmp_dir, "output_test.tsv-1037496")
 
     with tf.io.gfile.GFile(TMP_REPEATS_PATH, "r") as quest:
-        questions = quest['Selftext']
+        questions = quest['selftext']
 
     with tf.io.gfile.GFile(FINAL_OUTPUT_FILE,"w") as output_file, tf.io.gfile.GFile(OUTPUT_PRED_FILE, "r") as target:
         for q, t in zip(questions, target):
