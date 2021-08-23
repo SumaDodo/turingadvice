@@ -54,7 +54,7 @@ def main(_):
     with tf.io.gfile.GFile(FLAGS.input_path, "r") as pred, tf.io.gfile.GFile(OUTPUT_FILE, "w") as out:
         texts = [text for text in pred.read().splitlines()]
         for i in max_reward_index:
-            out.write(texts[i])
+            out.write(texts[i]+"\n")
 
 
 if __name__ == "__main__":
