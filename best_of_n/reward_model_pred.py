@@ -44,7 +44,7 @@ def main(_):
         my_block = [line.strip() for line in block[:N]]
         cur_pos = 0
         while block:
-            index = cur_pos * FLAGS.N + my_block.index(max(my_block))
+            index = cur_pos * N + my_block.index(max(my_block))
             max_reward_index.append(index)
             cur_pos += 1
             my_block = [line.strip() for line in block[cur_pos * N:(cur_pos + 1) * N]]
@@ -53,7 +53,7 @@ def main(_):
     with tf.io.gfile.GFile(FLAGS.input_path, "r") as pred, tf.io.gfile.GFile(OUTPUT_FILE, "w") as out:
         texts = [re.sub(r'\s+»\s+', '\n\n', text).strip() for text in pred.read().splitlines()]
         for i in max_reward_index:
-            out.write(texts[i]+"\n")
+            out.write(texts[i])
 
 
 if __name__ == "__main__":
