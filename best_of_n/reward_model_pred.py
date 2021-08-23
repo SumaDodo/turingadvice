@@ -41,6 +41,7 @@ def main(_):
     #from the reward model output file get the predictions with highest reward value
     with tf.io.gfile.GFile(FLAGS.reward_file_path,"r") as rewards:
         block = [line for line in rewards]
+        print(block)
         my_block = [line.strip() for line in block[:N]]
         cur_pos = 0
         while block:
