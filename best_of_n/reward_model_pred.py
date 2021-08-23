@@ -52,7 +52,7 @@ def main(_):
 
     #from N predictions for each input pick the one with highest reward value
     with tf.io.gfile.GFile(FLAGS.input_path, "r") as pred, tf.io.gfile.GFile(OUTPUT_FILE, "w") as out:
-        texts = [re.sub(r'\s+»\s+', '\n\n', text).strip() for text in pred.read().splitlines()]
+        texts = [text for text in pred.read().splitlines()]
         for i in max_reward_index:
             out.write(texts[i])
 
