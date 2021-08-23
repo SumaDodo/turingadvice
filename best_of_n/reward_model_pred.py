@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 from absl import flags
 
 import tensorflow.compat.v1 as tf
@@ -14,80 +15,45 @@ def _define_flags():
         help="Path to a tab-separated text file with columns [inputs, targets]"
     )
     flags.DEFINE_string(
+        name="reward_file_path",
+        default=None,
+        help="Path to reward model predictions file path"
+    )
+    flags.DEFINE_string(
         name="output_path",
         default=None,
         help="File to store predictions, one per line of input"
     )
     flags.DEFINE_string(
-        name="bucket_name",
-        default="seri2021-advice",
-        help="Root path of a GCS bucket for data and checkpoints"
-    )
-    flags.DEFINE_string(
-        name="model_size",
-        default="seri2021-advice",
-        help="Root path of a GCS bucket for data and checkpoints"
-    )
-    flags.DEFINE_string(
-        name="model_id",
-        default="seri2021-advice",
-        help="Root path of a GCS bucket for data and checkpoints"
-    )
-    flags.DEFINE_integer(
-        name="checkpoint_steps",
-        default=-1,
-        help="Steps in checkpoint to be used for prediction"
-    )
-    flags.DEFINE_integer(
-        name="iterations_per_loop",
-        default=1000,
-        help="How many steps to make in each estimator call."
-    )
-    flags.DEFINE_integer(
-        name="model_parallelism",
-        default=8,
-        help="Number of cores per model instance."
-    )
-    flags.DEFINE_integer(
-        name="batch_size",
-        default=1,
-        help="Batch size. Spillover samples are ignored"
-    )
-    flags.DEFINE_integer(
-        name="tokens_per_microbatch_per_replica",
-        default=1280 * 2,
-        help="How many tokens of input can each model replica handle?"
-    )
-    flags.DEFINE_boolean(
-        name="compute_mean",
-        default=False,
-        help="Compute the mean of all output predictions"
+        name="N",
+        default=None,
+        help="Number of targets for best of N"
     )
     return flags.FLAGS
 
 def main(_):
     FLAGS = _define_flags()
     FLAGS(sys.argv)
-    # Initialize model
-    model_dir = MODEL_DIR.format(
-        bucket_name=FLAGS.bucket_name,
-        model_size=FLAGS.model_size,
-        model_id=FLAGS.model_id
-    )
-    model = ComparativeRewardModel(
-        model_dir=model_dir,
-        tpu=os.uname()[1],
-        tpu_topology='2x2', # Must be this for validation
-        model_parallelism=FLAGS.model_parallelism,
-        batch_size=FLAGS.batch_size,
-        sequence_length=SEQUENCE_LENGTH,
-        iterations_per_loop=FLAGS.iterations_per_loop,
-    )
-    model.predict_from_file(
-        input_path=FLAGS.input_path,
-        output_path=FLAGS.output_path,
-        checkpoint_steps=FLAGS.checkpoint_steps
-    )
+    OUTPUT_FILE = os.path.join(FLAGS.tmp_dir, "Reward_output.txt")
+    max_reward_index = []
+
+    #from the reward model output file get the predictions with highest reward value
+    with tf.io.gfile.GFile(FLAGS.reward_file_path,"r") as rewards:
+        block = [line for line in rewards]
+        block = [line.strip() for line in block[:FLAGS.N]]
+        cur_pos = 0
+        while block:
+            index = cur_pos * FLAGS.N + my_block.index(max(my_block))
+            max_reward_index.append(index)
+            cur_pos += 1
+            my_block = [line.strip() for line in block[cur_pos * FLAGS.N:(cur_pos + 1) * FLAGS.N]]
+
+    #from N predictions for each input pick the one with highest reward value
+    with tf.io.gfile.GFile(FLAGS.input_path, "r") as pred, tf.io.gfile.GFile(OUTPUT_FILE, "w") as out:
+        texts = [re.sub(r'\s+»\s+', '\n\n', text).strip() for text in pred.read().splitlines()]
+        for i in max_reward_index:
+            out.write(texts[i]+"\n")
+
 
 if __name__ == "__main__":
     tf.app.run()

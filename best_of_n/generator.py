@@ -15,7 +15,8 @@ class BestOfNGenerator():
     
     def generate_N(self, inputs_path, outputs_path):
         # Repeat each input N times, store in temporary file
-        TMP_REPEATS_PATH = os.path.join(self.tmp_dir, "BoN-repeats.txt")
+        tmp_file_name = "BoN-repeats"+str(self.N)+".txt"
+        TMP_REPEATS_PATH = os.path.join(self.tmp_dir,tmp_file_name)
         with tf.io.gfile.GFile(inputs_path, "r") as inputs_file, \
              tf.io.gfile.GFile(TMP_REPEATS_PATH, "w") as repeats_file:
             for line in inputs_file:
