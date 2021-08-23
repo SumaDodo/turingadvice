@@ -20,6 +20,11 @@ def _define_flags():
         help="Path to reward model predictions file path"
     )
     flags.DEFINE_string(
+        name="tmp_dir",
+        default=None,
+        help="Path to final reward model predictions file path"
+    )
+    flags.DEFINE_string(
         name="N",
         default=None,
         help="Number of targets for best of N"
