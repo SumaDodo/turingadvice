@@ -36,17 +36,18 @@ def main(_):
     FLAGS(sys.argv)
     OUTPUT_FILE = os.path.join(FLAGS.tmp_dir, "Reward_output.txt")
     max_reward_index = []
+    N = int(FLAGS.N)
 
     #from the reward model output file get the predictions with highest reward value
     with tf.io.gfile.GFile(FLAGS.reward_file_path,"r") as rewards:
         block = [line for line in rewards]
-        block = [line.strip() for line in block[:FLAGS.N]]
+        block = [line.strip() for line in block[:N]]
         cur_pos = 0
         while block:
             index = cur_pos * FLAGS.N + my_block.index(max(my_block))
             max_reward_index.append(index)
             cur_pos += 1
-            my_block = [line.strip() for line in block[cur_pos * FLAGS.N:(cur_pos + 1) * FLAGS.N]]
+            my_block = [line.strip() for line in block[cur_pos * N:(cur_pos + 1) * N]]
 
     #from N predictions for each input pick the one with highest reward value
     with tf.io.gfile.GFile(FLAGS.input_path, "r") as pred, tf.io.gfile.GFile(OUTPUT_FILE, "w") as out:
