@@ -44,7 +44,7 @@ def main(_):
         print(block)
         my_block = [line for line in block[:N]]
         cur_pos = 0
-        while block:
+        while my_block:
             index = cur_pos * N + my_block.index(max(my_block))
             max_reward_index.append(index)
             cur_pos += 1
