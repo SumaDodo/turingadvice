@@ -42,7 +42,7 @@ def main(_):
     with tf.io.gfile.GFile(FLAGS.reward_file_path,"r") as rewards:
         block = [float(line.strip("\n")) for line in rewards]
         print(block)
-        my_block = [line.strip() for line in block[:N]]
+        my_block = [line for line in block[:N]]
         cur_pos = 0
         while block:
             index = cur_pos * N + my_block.index(max(my_block))
