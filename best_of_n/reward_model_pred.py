@@ -20,11 +20,6 @@ def _define_flags():
         help="Path to reward model predictions file path"
     )
     flags.DEFINE_string(
-        name="output_path",
-        default=None,
-        help="File to store predictions, one per line of input"
-    )
-    flags.DEFINE_string(
         name="N",
         default=None,
         help="Number of targets for best of N"
