@@ -48,7 +48,7 @@ def main(_):
             index = cur_pos * N + my_block.index(max(my_block))
             max_reward_index.append(index)
             cur_pos += 1
-            my_block = [line.strip() for line in block[cur_pos * N:(cur_pos + 1) * N]]
+            my_block = [line for line in block[cur_pos * N:(cur_pos + 1) * N]]
 
     #from N predictions for each input pick the one with highest reward value
     with tf.io.gfile.GFile(FLAGS.input_path, "r") as pred, tf.io.gfile.GFile(OUTPUT_FILE, "w") as out:
