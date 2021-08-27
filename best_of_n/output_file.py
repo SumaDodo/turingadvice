@@ -14,9 +14,9 @@ def _define_flags():
 def main(_):
     FLAGS = _define_flags()
     FLAGS(sys.argv)
-    FINAL_OUTPUT_FILE = os.path.join(FLAGS.tmp_dir, "Output_8N_3.txt")
+    FINAL_OUTPUT_FILE = os.path.join(FLAGS.tmp_dir, "Output_8N_5.txt")
     TMP_REPEATS_PATH = os.path.join(FLAGS.tmp_dir, "BoN-repeats8.txt")
-    OUTPUT_PRED_FILE = os.path.join(FLAGS.tmp_dir, "output_8N_3.tsv-1010000")
+    OUTPUT_PRED_FILE = os.path.join(FLAGS.tmp_dir, "output_8N_5.tsv-1010000")
 
 
     with tf.io.gfile.GFile(TMP_REPEATS_PATH, "r") as quest, tf.io.gfile.GFile(FINAL_OUTPUT_FILE,"w") as output_file, tf.io.gfile.GFile(OUTPUT_PRED_FILE, "r") as target:
