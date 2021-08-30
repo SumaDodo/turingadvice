@@ -16,7 +16,7 @@ def main(_):
     FLAGS(sys.argv)
     FINAL_OUTPUT_FILE = os.path.join(FLAGS.tmp_dir, "Output_32N_1.txt")
     TMP_REPEATS_PATH = os.path.join(FLAGS.tmp_dir, "BoN-repeats32.txt")
-    OUTPUT_PRED_FILE = os.path.join(FLAGS.tmp_dir, "output_16N_1.tsv-1010000")
+    OUTPUT_PRED_FILE = os.path.join(FLAGS.tmp_dir, "output_32N_1.tsv-1010000")
 
 
     with tf.io.gfile.GFile(TMP_REPEATS_PATH, "r") as quest, tf.io.gfile.GFile(FINAL_OUTPUT_FILE,"w") as output_file, tf.io.gfile.GFile(OUTPUT_PRED_FILE, "r") as target:
