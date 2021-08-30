@@ -15,7 +15,7 @@ def main(_):
     FLAGS = _define_flags()
     FLAGS(sys.argv)
     FINAL_OUTPUT_FILE = os.path.join(FLAGS.tmp_dir, "Output_16N_2_2.txt")
-    TMP_REPEATS_PATH = os.path.join(FLAGS.tmp_dir, "BoN-repeats2.txt")
+    TMP_REPEATS_PATH = os.path.join(FLAGS.tmp_dir, "BoN-repeats16.txt")
     OUTPUT_PRED_FILE = os.path.join(FLAGS.tmp_dir, "output_16N_2_2.tsv-1010000")
 
 
